@@ -74,7 +74,7 @@ int led = 0;
 
 void benchmark(){
 //	https://www.keil.com/pack/doc/CMSIS/DSP/html/group__ComplexFFT.html
-	arm_cfft_radix4_instance_f32 S;	/* ARM CFFT module */
+	arm_cfft_instance_f32 S;	/* ARM CFFT module */
 	float32_t maxValue;				/* Max FFT value is stored here */
 	uint32_t maxIndex;				/* Index in Output array where max value is */
 	int i = 0;
@@ -90,10 +90,11 @@ void benchmark(){
 	}
 
 	/* Initialize the CFFT/CIFFT module, intFlag = 0, doBitReverse = 1 */
-	arm_cfft_radix4_init_f32(&S, FFT_SIZE, 0, 1);
+	//arm_cfft_radix4_init_f32(&S, FFT_SIZE, 0, 1);
 
 	/* Process the data through the CFFT/CIFFT module */
-	arm_cfft_radix4_f32(&S, Input);
+	//arm_cfft_radix4_f32(&S, Input);
+	arm_cfft_f32(&S, Input, 0, 1);
 
 	/* Process the data through the Complex Magniture Module for calculating the magnitude at each bin */
 	arm_cmplx_mag_f32(Input, Output, FFT_SIZE);
@@ -140,7 +141,7 @@ void benchmark(){
 
 	while(HAL_GetTick() - start_millis < INTERVAL) {
 		/* Process the data through the CFFT/CIFFT module */
-		arm_cfft_radix4_f32(&S, Input);
+//		arm_cfft_radix4_f32(&S, Input);
 
 		/* Process the data through the Complex Magniture Module for calculating the magnitude at each bin */
 		arm_cmplx_mag_f32(Input, Output, FFT_SIZE);
