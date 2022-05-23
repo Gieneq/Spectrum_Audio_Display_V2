@@ -67,8 +67,12 @@ Usining scipy FFt can be obtained. As argument it gets list of time-based sample
 ```python
 import scipy.fftpack
 
+
 yf = scipy.fftpack.fft(val)
+
 mags = 2.0/samples_count * np.abs(yf[:samples_count//2])
+
+
 
 ```
 
