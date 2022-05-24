@@ -1,0 +1,17 @@
+#pragma once
+
+
+#define FFT_SAMPLES_COUNT 1024
+#define SAMPLES_BUFFER_LEN (FFT_SAMPLES_COUNT*2)
+
+#define BANDS_COUNT 19
+#define DISPLAY_HEIGHT 21
+
+#define FRONT_LEDS_COUNT (BANDS_COUNT*DISPLAY_HEIGHT)
+#define BASE_LEDS_COUNT (7*2)
+
+// Remeber to change in Cube Configuration
+#define SAMPLING_RATE 44e3
+#define FFT_REFRESHRATE 30
+#define DISPLAY_REFRESHRATE 30
+
