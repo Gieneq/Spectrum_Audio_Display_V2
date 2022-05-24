@@ -1,15 +1,15 @@
-# About
+# About 🎧
 
 This repository contains everything you need to build your own Audio Spectrum Display. Here you can find:
 - [x] [FFT_Notebook](FFT_Notebook) FFT CMSIS benchamrk with comparison to scipy:
   - Sample signal generatrion,
   - Source Code of STM32CubeIDE project for STM32F4,
   - Jupyter Notebook with comparison and plots.
-- [ ] [Electronics](Electronics)Analog circuit simulation and schermatic:
+- [ ] [Electronics](Electronics) Analog circuit simulation and schermatic:
   - Jupyter Notebook with simulation using complex impedance models of RLC components,
   - Autodesk EAGLE schematic,
   - PCB design and gerber files for manufacturing.
-- [ ] [ASD_STM32F4](ASD_STM32F4)STM32CubeIDE main controller project,
+- [ ] [ASD_STM32F4](ASD_STM32F4) STM32CubeIDE main controller project,
 - [x] [Mechanics](Mechanics) Mechanical design of the casing:
   - Corel Draw and PDF files,
   - YouTube video about the casing assembly.
@@ -20,9 +20,16 @@ This repo is still in development. Check out [previous version](https://github.c
   <img width="500" alt="Audio Spectrum Display with fire effect" src="Img/Audio_Spectrum_Display_fire.jpg">
 </p>
 
-# FFT benchmarking
+## FFT benchmarking 🔥
 In this [directory](FFT_Notebook) there is shown comparison between CMSIS DSP library and Python scipy.
 
 <p align="center">
   <img width="500" alt="Audio Spectrum Display with fire effect" src="Img/fft_visualization_scipy_cmsis.png">
+</p>
+
+## Mechanical design 🖥️
+In this [directory](Mechanics) there are all manufacturing files used to lasercut/mill the casing's parts.
+
+<p align="center">
+  <img width="500" alt="Mechanical design of the display" src="Img/casing_mechanical_design.jpg">
 </p>

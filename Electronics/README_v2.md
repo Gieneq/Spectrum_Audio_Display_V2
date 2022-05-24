@@ -1,46 +1,6 @@
 # Electronics
 
-In this directory there is shown process of designing analog circuit which is used to change offset of input signal.
-
-The electronic part consists of:
-
-* switching input,
-* analog filter-amplifier,
-* 5 V / 22 A power supply,
-* STM32F4 main controller,
-* 399 WS2812B LED display (single zig-zag strip),
-* shorter 14 LED strip in base
-
-
-## Electronic schematic
-
-The analog circuit is built around TDA2822 audio aplifier.
-
-<p align="center">
-  <img width="500" alt="Electronic schematic" src="ASD_V2_Main_Board.png">
-</p>
-
-<!-- # Desing of the circuit
-
-## Signal Source
-
-In this project there are 2 signal sources:
-
-- microphone built around MAX9814 IC with amplifier and signal's gain control,
-- 3.5 mm audio jack with plug-in switch, to cut off signal from the microphone.
-
-Todo table comparison
-
-## System simulation
-
-meh -->
-
-
-
-<!-- 
-# Electronics
-
-In this article it will be explained how to choose values of passive components to process signal from audio source before being sampled by ADC. -->
+In this article it will be explained how to choose values of passive components to process signal from audio source before being sampled by ADC.
 
 # Circuit theory basics
 
@@ -429,3 +389,14 @@ Wstep do elektroniki - schemat blokowy i opiskazdego bloku
 
 Coming coon
 
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTk5MjYxNzAwMywyMDA0NDU3NjM0LDEwMz
+AxMTM5ODIsMTcyMzU4MDY1OSwxNTY1NzU1MDYxLDYyODIzMjIs
+LTU2NzkzMTk1LC0zODM2NzIxNjUsMTc0NzAxOTgwNiwtNTM1Mj
+MyMjQwLDQ2MjAxMDAwOSwxMjM5NDY2MTU5LC0xMzk4MzI2NzQ5
+LDY4MTM2NTIzMiwtMTYzMjkxNzk0NywtMTg3MDc1OTkxLDEyMD
+c3MDk0NTAsOTQ5NTMwODgwLDQ5ODM5NTEsMTE5ODUwNTYwMF19
+
+-->
