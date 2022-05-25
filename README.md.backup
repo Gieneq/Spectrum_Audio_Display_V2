@@ -14,7 +14,7 @@ This repository contains everything you need to build your own Audio Spectrum Di
   - Corel Draw and PDF files,
   - YouTube video about the casing assembly.
 
-This repo is still in development. Check out [previous version](https://github.com/Gieneq/Audio-Spectrum-Display) of this display.
+This repo is still in development. Check out ✅ [previous version](https://github.com/Gieneq/Audio-Spectrum-Display) of this display.
 
 <p align="center">
   <img width="500" alt="Audio Spectrum Display with fire effect" src="Img/Audio_Spectrum_Display_fire.jpg">

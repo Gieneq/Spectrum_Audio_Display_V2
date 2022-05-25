@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "ASD_presets.h"
 #include "ASD_Display.h"
+#include "ASD_FFT.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +58,11 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *AdcHandle)
+{
+	ASD_Next_Sample_Aquired();
+}
 
 /* USER CODE END 0 */
 
@@ -97,6 +103,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  ASD_FFT_Init();
+
   while (1)
   {
     /* USER CODE END WHILE */

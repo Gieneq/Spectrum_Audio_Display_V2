@@ -1,1 +1,2 @@
-../Core/Src/ASD_FFT.c:6:6:ASD_FFT_Init	8	static
+../Core/Src/ASD_FFT.c:7:6:ASD_FFT_Init	0	static
+../Core/Src/ASD_FFT.c:13:6:ASD_Next_Sample_Aquired	0	static
