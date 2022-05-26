@@ -20,6 +20,7 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -28,6 +29,7 @@
 #include "ASD_presets.h"
 #include "ASD_Display.h"
 #include "ASD_FFT.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,10 +60,37 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int __io_putchar(int ch)
+{
+  if (ch == '\n') {
+    __io_putchar('\r');
+  }
+
+  HAL_UART_Transmit(&huart2, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
+
+  return 1;
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim == &htim7) {
+    ASD_update();
+    //raczej po tym trzeba wyliczyc animacje
+  }
+}
+
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *AdcHandle)
+{
+	if(AdcHandle == &hadc1) {
+		ASD_Next_Sample_Aquired();
+	}
+}
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *AdcHandle)
 {
-	ASD_Next_Sample_Aquired();
+	if(AdcHandle == &hadc1) {
+		ASD_Next_Sample_Aquired();
+	}
 }
 
 /* USER CODE END 0 */
@@ -97,6 +126,8 @@ int main(void)
   MX_DMA_Init();
   MX_USART2_UART_Init();
   MX_ADC1_Init();
+  MX_TIM6_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -106,8 +137,12 @@ int main(void)
 
   ASD_FFT_Init();
 
+  printf("Loop started\n");
+
   while (1)
   {
+	  ASD_Print_Results();
+	  HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
