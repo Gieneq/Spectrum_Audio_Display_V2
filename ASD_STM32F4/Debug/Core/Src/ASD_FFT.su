@@ -1,5 +1,5 @@
-../Core/Src/ASD_FFT.c:75:6:ASD_FFT_Init	16	static
-../Core/Src/ASD_FFT.c:96:6:ASD_Next_Batch_Aquired	0	static
-../Core/Src/ASD_FFT.c:108:6:ASD_set_frequency	0	static
-../Core/Src/ASD_FFT.c:119:6:ASD_update	0	static
-../Core/Src/ASD_FFT.c:122:6:ASD_Print_Results	12456	static
+../Core/Src/ASD_FFT.c:53:6:ASD_FFT_init	0	static
+../Core/Src/ASD_FFT.c:72:6:ASD_FFT_toggleBuffers	0	static
+../Core/Src/ASD_FFT.c:81:12:ASD_FFT_evalFFT	32	static
+../Core/Src/ASD_FFT.c:140:6:ASD_FFT_evalDynamics	40	static
+../Core/Src/ASD_FFT.c:166:6:ASD_FFT_printDebug	0	static

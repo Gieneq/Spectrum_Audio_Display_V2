@@ -21,16 +21,14 @@
 #include "adc.h"
 #include "dac.h"
 #include "dma.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "ASD_presets.h"
-#include "ASD_Display.h"
-#include "ASD_FFT.h"
-#include "stdio.h"
+#include "ASD_Core.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -72,20 +70,22 @@ int __io_putchar(int ch) {
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim == &htim7) {
-    ASD_update();
-    //raczej po tym trzeba wyliczyc animacje
+	  //1ms timer
+	  ASD_CORE_asyncUpdate();
   }
 }
 
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *AdcHandle) {
 	if(AdcHandle == &hadc1) {
-		ASD_Next_Batch_Aquired();
+		ASD_CORE_processSignal();
+		ASD_CORE_render();
 	}
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *AdcHandle) {
 	if(AdcHandle == &hadc1) {
-		ASD_Next_Batch_Aquired();
+		ASD_CORE_processSignal();
+		ASD_CORE_render();
 	}
 }
 
@@ -126,21 +126,26 @@ int main(void)
   MX_TIM7_Init();
   MX_DAC_Init();
   MX_TIM2_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-  ASD_FFT_Init();
-
+  HAL_Delay(1000);
+  ASD_CORE_init();
+  ASD_CORE_setSwipe(0);
+  ASD_CORE_selectSignalSource(SOURCE_AUX);
+  ASD_DISP_setMaxBrightness(0.1);
   printf("Loop started\n");
 
   while (1)
   {
-	  ASD_Print_Results();
-	  HAL_Delay(5000);
+//	  ASD_CORE_render();
+//	  HAL_Delay(15);
+//	  ASD_Print_Debug();
+//	  HAL_Delay(5000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -160,7 +165,7 @@ void SystemClock_Config(void)
   /** Configure the main internal regulator output voltage
   */
   __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -171,18 +176,11 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 180;
+  RCC_OscInitStruct.PLL.PLLN = 104;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
   RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Activate the Over-Drive mode
-  */
-  if (HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     Error_Handler();
   }
@@ -196,7 +194,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
   }

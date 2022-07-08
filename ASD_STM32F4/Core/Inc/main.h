@@ -31,7 +31,17 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "adc.h"
+#include "dac.h"
+#include "dma.h"
+#include "spi.h"
+#include "tim.h"
+#include "usart.h"
+#include "gpio.h"
+#include "stdio.h"
+#include <arm_math.h>
+#include <arm_const_structs.h>
+#include "pixeltypes.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -57,6 +67,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BATCH_DONE_Pin GPIO_PIN_0
+#define BATCH_DONE_GPIO_Port GPIOC
+#define SWIPE_NEXT_Pin GPIO_PIN_0
+#define SWIPE_NEXT_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

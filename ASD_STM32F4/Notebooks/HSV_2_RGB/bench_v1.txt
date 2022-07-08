@@ -1,0 +1,81 @@
+/////RESULT: function execution time: 50560ns
+
+typedef struct hsv_t {
+	float hue;
+	float saturation;
+	float value;
+} hsv_t;
+
+typedef struct rgb_t {
+	uint8_t red;
+	uint8_t green;
+	uint8_t blue;
+} rgb_t;
+
+
+void convert_hsv_to_rgb() {
+//	https://gist.github.com/fairlight1337/4935ae72bcbcc1ba5c72
+	float corr_value = pow(hsv_data.value, 1.5);
+
+	if(hsv_data.value <= 0.0){
+		rgb_data.red = 0;
+		rgb_data.green = 0;
+		rgb_data.blue = 0;
+		return;
+	}
+
+	float fC = corr_value * hsv_data.saturation; // Chroma
+	float fHPrime = fmod(hsv_data.hue / 60.0, 6);
+	float fX = fC * (1 - fabs(fmod(fHPrime, 2) - 1));
+	float fM = corr_value - fC;
+
+	if (0 <= fHPrime && fHPrime < 1) {
+		rgb_data.red = (uint8_t) (fC * 255);
+		rgb_data.green = (uint8_t) (fX * 255);
+		rgb_data.blue = 0;
+	} else if (1 <= fHPrime && fHPrime < 2) {
+		rgb_data.red = (uint8_t) (fX * 255);
+		rgb_data.green = (uint8_t) (fC * 255);
+		rgb_data.blue = 0;
+	} else if (2 <= fHPrime && fHPrime < 3) {
+		rgb_data.red = 0;
+		rgb_data.green = (uint8_t) (fC * 255);
+		rgb_data.blue = (uint8_t) (fX * 255);
+	} else if (3 <= fHPrime && fHPrime < 4) {
+		rgb_data.red = 0;
+		rgb_data.green = (uint8_t) (fX * 255);
+		rgb_data.blue = (uint8_t) (fC * 255);
+	} else if (4 <= fHPrime && fHPrime < 5) {
+		rgb_data.red = (uint8_t) (fX * 255);
+		rgb_data.green = 0;
+		rgb_data.blue = (uint8_t) (fC * 255);
+	} else if (5 <= fHPrime && fHPrime < 6) {
+		rgb_data.red = (uint8_t) (fC * 255);
+		rgb_data.green = 0;
+		rgb_data.blue = (uint8_t) (fX * 255);
+	} else {
+		rgb_data.red = 0;
+		rgb_data.green = 0;
+		rgb_data.blue = 0;
+	}
+	rgb_data.red += (uint8_t) (fM * 255);
+	rgb_data.green += (uint8_t) (fM * 255);
+	rgb_data.blue += (uint8_t) (fM * 255);
+}
+
+
+
+
+
+
+
+  while (1)
+  {
+		uint32_t startTime = HAL_GetTick();
+		for(int i = 0; i < 50000; i++) {
+			convert_hsv_to_rgb();
+		}
+		uint32_t endTime = HAL_GetTick();
+		uint32_t deltaTime = endTime - startTime;
+		uint32_t functionExecutionTimeNs = (uint32_t)(deltaTime*1.0e6 / TEST_DATA_LEN);
+		while(1);

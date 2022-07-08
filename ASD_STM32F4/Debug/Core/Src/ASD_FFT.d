@@ -1,18 +1,14 @@
 Core/Src/ASD_FFT.o: ../Core/Src/ASD_FFT.c ../Core/Inc/ASD_FFT.h \
- ../Drivers/CMSIS/DSP/Include/arm_math.h \
- ../Drivers/CMSIS/Include/core_cm4.h \
- ../Drivers/CMSIS/Include/cmsis_version.h \
- ../Drivers/CMSIS/Include/cmsis_compiler.h \
- ../Drivers/CMSIS/Include/cmsis_gcc.h \
- ../Drivers/CMSIS/DSP/Include/arm_const_structs.h \
- ../Drivers/CMSIS/DSP/Include/arm_math.h \
- ../Drivers/CMSIS/DSP/Include/arm_common_tables.h ../Core/Inc/adc.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h \
+ ../Drivers/CMSIS/Include/core_cm4.h \
+ ../Drivers/CMSIS/Include/cmsis_version.h \
+ ../Drivers/CMSIS/Include/cmsis_compiler.h \
+ ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
@@ -33,20 +29,18 @@ Core/Src/ASD_FFT.o: ../Core/Src/ASD_FFT.c ../Core/Inc/ASD_FFT.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/tim.h ../Core/Inc/dac.h ../Core/Inc/ASD_presets.h
+ ../Core/Inc/adc.h ../Core/Inc/dac.h ../Core/Inc/dma.h ../Core/Inc/spi.h \
+ ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
+ ../Drivers/CMSIS/DSP/Include/arm_math.h \
+ ../Drivers/CMSIS/DSP/Include/arm_const_structs.h \
+ ../Drivers/CMSIS/DSP/Include/arm_math.h \
+ ../Drivers/CMSIS/DSP/Include/arm_common_tables.h \
+ ../Core/Inc/pixeltypes.h ../Core/Inc/ASD_Presets.h
 ../Core/Inc/ASD_FFT.h:
-../Drivers/CMSIS/DSP/Include/arm_math.h:
-../Drivers/CMSIS/Include/core_cm4.h:
-../Drivers/CMSIS/Include/cmsis_version.h:
-../Drivers/CMSIS/Include/cmsis_compiler.h:
-../Drivers/CMSIS/Include/cmsis_gcc.h:
-../Drivers/CMSIS/DSP/Include/arm_const_structs.h:
-../Drivers/CMSIS/DSP/Include/arm_math.h:
-../Drivers/CMSIS/DSP/Include/arm_common_tables.h:
-../Core/Inc/adc.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -54,6 +48,10 @@ Core/Src/ASD_FFT.o: ../Core/Src/ASD_FFT.c ../Core/Inc/ASD_FFT.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h:
+../Drivers/CMSIS/Include/core_cm4.h:
+../Drivers/CMSIS/Include/cmsis_version.h:
+../Drivers/CMSIS/Include/cmsis_compiler.h:
+../Drivers/CMSIS/Include/cmsis_gcc.h:
 ../Drivers/CMSIS/Include/mpu_armv7.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
@@ -74,9 +72,20 @@ Core/Src/ASD_FFT.o: ../Core/Src/ASD_FFT.c ../Core/Inc/ASD_FFT.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-../Core/Inc/tim.h:
+../Core/Inc/adc.h:
 ../Core/Inc/dac.h:
-../Core/Inc/ASD_presets.h:
+../Core/Inc/dma.h:
+../Core/Inc/spi.h:
+../Core/Inc/tim.h:
+../Core/Inc/usart.h:
+../Core/Inc/gpio.h:
+../Drivers/CMSIS/DSP/Include/arm_math.h:
+../Drivers/CMSIS/DSP/Include/arm_const_structs.h:
+../Drivers/CMSIS/DSP/Include/arm_math.h:
+../Drivers/CMSIS/DSP/Include/arm_common_tables.h:
+../Core/Inc/pixeltypes.h:
+../Core/Inc/ASD_Presets.h:

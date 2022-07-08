@@ -1,0 +1,16 @@
+29240ns
+
+  while (1)
+  {
+		uint32_t startTime = HAL_GetTick();
+		for(int i = 0; i < loops; i++) {
+			int idx = i%2048;
+			hsv_data.hue = HSV_TEST_DATA[idx].hue;
+			hsv_data.saturation = HSV_TEST_DATA[idx].saturation;
+			hsv_data.value = HSV_TEST_DATA[idx].value;
+			convert_hsv_to_rgb();
+		}
+		uint32_t endTime = HAL_GetTick();
+		uint32_t deltaTime = endTime - startTime;
+		uint32_t functionExecutionTimeNs = (uint32_t)(deltaTime*1.0e6 / loops);
+		while(1);
