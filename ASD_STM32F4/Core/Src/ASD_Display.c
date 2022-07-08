@@ -16,14 +16,14 @@ float32_t _maxBrightness;
 #define HSV_SECTION_3 (0x40)
 
 
-void hsv2rgb_raw_C (const struct CHSV* hsv, struct CRGB* rgb)
+void hsv2rgb_raw_C (const CHSV* hsv, CRGB* rgb)
 {
     // Convert hue, saturation and brightness ( HSV/HSB ) to RGB
     // "Dimming" is used on saturation and brightness to make
     // the output more visually linear.
 
     // Apply dimming curves
-    uint8_t value = APPLY_DIMMING( hsv->val);
+    uint8_t value = APPLY_DIMMING( (uint8_t)(hsv->val * _maxBrightness));
     uint8_t saturation = hsv->sat;
 
     // The brightness floor is minimum number that all of
@@ -76,12 +76,23 @@ void hsv2rgb_raw_C (const struct CHSV* hsv, struct CRGB* rgb)
     }
 }
 
+CHSV* ASD_DISP_getPixel(int x, int y) {
+	x = BANDS_COUNT - x - 1;
+	y = (x%2?DISPLAY_HEIGHT-y-1:y);
+	int idx = y + x * DISPLAY_HEIGHT;
+	if(idx >= 399)//todo def
+		return NULL;
+
+	return _draw_hsv_buffer + idx;
+//	return &_draw_hsv_buffer[idx];
+}
+
 void ASD_DISP_setPixel(int x, int y, uint8_t hue, uint8_t saturation, uint8_t value) {
 	x = BANDS_COUNT - x - 1;
 	y = (x%2?DISPLAY_HEIGHT-y-1:y);
 	int idx = y + x * DISPLAY_HEIGHT;
 
-	if(idx > 399)
+	if(idx >= 399)//todo def
 		return;
 
 	_draw_hsv_buffer[idx].hue = hue;

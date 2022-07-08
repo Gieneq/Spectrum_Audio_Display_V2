@@ -29,6 +29,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ASD_Core.h"
+#include "ASD_AnimationBasic.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -138,6 +140,7 @@ int main(void)
   ASD_CORE_setSwipe(0);
   ASD_CORE_selectSignalSource(SOURCE_AUX);
   ASD_DISP_setMaxBrightness(0.1);
+  ASD_CORE_attachAnimation(ASD_Animation_basic);
   printf("Loop started\n");
 
   while (1)

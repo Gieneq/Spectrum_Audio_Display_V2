@@ -42,8 +42,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/pixeltypes.h ../Core/Inc/adc.h ../Core/Inc/dac.h \
  ../Core/Inc/dma.h ../Core/Inc/spi.h ../Core/Inc/tim.h \
  ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Inc/ASD_Core.h \
- ../Core/Inc/ASD_Presets.h ../Core/Inc/ASD_FFT.h \
- ../Core/Inc/ASD_Animation.h ../Core/Inc/ASD_Display.h
+ ../Core/Inc/ASD_AnimationBasic.h ../Core/Inc/ASD_Presets.h \
+ ../Core/Inc/ASD_Display.h ../Core/Inc/ASD_FFT.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -100,7 +100,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/usart.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/ASD_Core.h:
+../Core/Inc/ASD_AnimationBasic.h:
 ../Core/Inc/ASD_Presets.h:
-../Core/Inc/ASD_FFT.h:
-../Core/Inc/ASD_Animation.h:
 ../Core/Inc/ASD_Display.h:
+../Core/Inc/ASD_FFT.h:

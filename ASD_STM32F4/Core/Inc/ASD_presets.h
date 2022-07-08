@@ -21,9 +21,12 @@ typedef struct bounds_t {
 	float32_t velocities[BANDS_COUNT];
 	float32_t accelerations[BANDS_COUNT];
 	float32_t dt_sec;
+	float32_t heightsSum;
+	int isIdle;
 } bounds_t;
 
-typedef void (*animation_stage_t)(bounds_t* bounds);
+//typedef void (*animation_stage_t)(bounds_t* bounds);
+typedef void (*animation_t)(bounds_t* bounds);
 
 typedef enum
 {

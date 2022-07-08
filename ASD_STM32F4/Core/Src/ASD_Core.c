@@ -5,6 +5,23 @@ uint16_t _samplingTimeMicros = (int)(1e6/44e3);
 //uint16_t _fftTimeMicros;
 //uint16_t _renderTimeMicros;
 
+#define IDLE_DETECTOR_ON_DISABLING_INTERVAL 500
+#define IDLE_DETECTOR_OFF_ENABLING_INTERVAL 6000
+
+typedef enum {
+	IDLE_ON,
+	IDLE_ON_DISABLING,
+	IDLE_OFF,
+	IDLE_OFF_ENABLING
+} idle_t;
+
+idle_t idleState;
+uint32_t idleDetectorStartTime;;
+uint32_t idleDetectorInterval;
+
+animation_t _currentAnimation;
+animation_t _attachedAnimation;
+
 const uint16_t DAC_SINE_SAMPLES[128] = {2048, 2142, 2236, 2329, 2422, 2514, 2605, 2694, 2782, 2868, 2952, 3034, 3114, 3191, 3265, 3337, 3405, 3470, 3531, 3589, 3644, 3694, 3740, 3783, 3821, 3855, 3884, 3909, 3930, 3946, 3958, 3965, 3967, 3965, 3958, 3946, 3930, 3909, 3884, 3855, 3821, 3783, 3740, 3694, 3644, 3589, 3531, 3470, 3405, 3337, 3265, 3191, 3114, 3034, 2952, 2868, 2782, 2694, 2605, 2514, 2422, 2329, 2236, 2142, 2048, 1953, 1859, 1766, 1673, 1581, 1490, 1401, 1313, 1227, 1143, 1061, 981, 904, 830, 758, 690, 625, 564, 506, 451, 401, 355, 312, 274, 240, 211, 186, 165, 149, 137, 130, 128, 130, 137, 149, 165, 186, 211, 240, 274, 312, 355, 401, 451, 506, 564, 625, 690, 758, 830, 904, 981, 1061, 1143, 1227, 1313, 1401, 1490, 1581, 1673, 1766, 1859, 1953};
 
 float32_t bands[BANDS_COUNT];
@@ -28,6 +45,47 @@ int _swipeCurrentFreq;
 //int _swipe_tick;
 //int _swipe_current_tick;
 
+static void onEnterIdleState() {
+	_currentAnimation = ASD_Animation_dummy;
+}
+
+static void onLeaveIdleState() {
+	_currentAnimation = _attachedAnimation;
+}
+
+static void updateIdeDetector(bounds_t *bounds) {
+	int triggered = !bounds->isIdle;
+
+	if(idleState == IDLE_ON) {
+		if(triggered) {
+			idleState = IDLE_ON_DISABLING;
+			idleDetectorInterval = IDLE_DETECTOR_ON_DISABLING_INTERVAL;
+			idleDetectorStartTime = HAL_GetTick();
+		}
+	} else if(idleState == IDLE_ON_DISABLING) {
+		if(triggered) {
+			if(HAL_GetTick() - idleDetectorStartTime > idleDetectorInterval){
+				idleState = IDLE_OFF; //SUCCESS
+				onLeaveIdleState();
+			}
+		} else
+			idleState = IDLE_ON;
+	} else if(idleState == IDLE_OFF) {
+		if(!triggered) {
+			idleState = IDLE_OFF_ENABLING;
+			idleDetectorInterval = IDLE_DETECTOR_OFF_ENABLING_INTERVAL;
+			idleDetectorStartTime = HAL_GetTick();
+		}
+	} else if(idleState == IDLE_OFF_ENABLING) {
+		if(!triggered) {
+			if(HAL_GetTick() - idleDetectorStartTime > idleDetectorInterval){
+				idleState = IDLE_ON; //SUCCESS
+				onEnterIdleState();
+			}
+		} else
+			idleState = IDLE_OFF;
+	}
+}
 
 void ASD_CORE_init() {
 	ASD_FFT_init();
@@ -41,6 +99,9 @@ void ASD_CORE_init() {
     HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)DAC_SINE_SAMPLES, DAC_SINE_SAMPLES_COUNT, DAC_ALIGN_12B_R);
     HAL_TIM_Base_Start(&htim2); //DAC trigger event
     ASD_CORE_setGeneratorFrequency(BASE_DAC_FREQ); //using Timer2 ARR
+    ASD_CORE_attachAnimation(ASD_Animation_dummy);
+    idleState = IDLE_ON;
+    onEnterIdleState();
 }
 
 /* Execute every 1 tick = 1 ms */
@@ -76,7 +137,8 @@ void ASD_CORE_processSignal() {
 	ASD_FFT_evalFFT(bands);
 
 	ASD_FFT_evalDynamics(bands, &bounds, _samplingTimeMicros);
-	ASD_animate(&bounds);
+	updateIdeDetector(&bounds);
+	_currentAnimation(&bounds);
 	ASD_DISP_prepare();
 	HAL_GPIO_WritePin(BATCH_DONE_GPIO_Port, BATCH_DONE_Pin, GPIO_PIN_RESET);
 }
@@ -106,6 +168,11 @@ void ASD_CORE_selectSignalSource(source_t source) {
 	//todo some relay to switch signal to ADC
 }
 
+void ASD_CORE_attachAnimation(animation_t animation){
+	_attachedAnimation = animation;
+	if(idleState == IDLE_OFF || idleState == IDLE_OFF_ENABLING)
+		onLeaveIdleState();
+}
 
 
 

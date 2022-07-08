@@ -49,6 +49,7 @@ float32_t bounds_last_velocity[BANDS_COUNT];
 float32_t bounds_velocity[BANDS_COUNT];
 float32_t bounds_acceleration[BANDS_COUNT];
 
+#define IDLE_SUM_THRESHOLD 0.2
 
 void ASD_FFT_init() {
 	/* Key points used in double buffering */
@@ -154,11 +155,16 @@ void ASD_FFT_evalDynamics(float32_t* boundHeights, bounds_t* bounds, float32_t d
 			bounds_heights[i] = 0;
 		}
 
+		float boundsSum = 0;
 		for(int i = 0; i < BANDS_COUNT; i++) {
 			bounds->heights[i] = boundHeights[i];
+			boundsSum += bounds->heights[i];
 			bounds->velocities[i] = bounds_velocity[i];
 			bounds->accelerations[i] = bounds_acceleration[i];
 		}
+		bounds->heightsSum = boundsSum;
+		bounds->isIdle = boundsSum < IDLE_SUM_THRESHOLD;
+
 		bounds->dt_sec = dts;
 }
 

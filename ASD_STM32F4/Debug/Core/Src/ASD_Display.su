@@ -1,5 +1,6 @@
-../Core/Src/ASD_Display.c:65:6:hsv2rgb_raw_C	20	static
-../Core/Src/ASD_Display.c:178:6:ASD_DISP_setPixel	8	static
-../Core/Src/ASD_Display.c:191:6:ASD_DISP_prepare	24	static
-../Core/Src/ASD_Display.c:214:6:ASD_DISP_render	8	static
-../Core/Src/ASD_Display.c:219:6:ASD_DISP_setMaxBrightness	0	static
+../Core/Src/ASD_Display.c:19:6:hsv2rgb_raw_C	32	static
+../Core/Src/ASD_Display.c:79:7:ASD_DISP_getPixel	0	static
+../Core/Src/ASD_Display.c:90:6:ASD_DISP_setPixel	8	static
+../Core/Src/ASD_Display.c:103:6:ASD_DISP_prepare	24	static
+../Core/Src/ASD_Display.c:126:6:ASD_DISP_render	8	static
+../Core/Src/ASD_Display.c:131:6:ASD_DISP_setMaxBrightness	0	static

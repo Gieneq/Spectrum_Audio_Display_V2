@@ -29,7 +29,7 @@
 //#define DRAW_BUFFER_LEN (FRONT_LEDS_COUNT + BASE_LEDS_COUNT)
 
 
-//void ASD_DISP_setPixel(int x, int y, float32_t hue, float32_t saturation, float32_t value);
+CHSV* ASD_DISP_getPixel(int x, int y);
 void ASD_DISP_setPixel(int x, int y, uint8_t hue, uint8_t saturation, uint8_t value);
 void ASD_DISP_prepare();
 void ASD_DISP_render();

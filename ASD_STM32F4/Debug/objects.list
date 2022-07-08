@@ -1,4 +1,5 @@
-"./Core/Src/ASD_Animation.o"
+"./Core/Src/ASD_AnimationBasic.o"
+"./Core/Src/ASD_AnimationFlame.o"
 "./Core/Src/ASD_Core.o"
 "./Core/Src/ASD_Display.o"
 "./Core/Src/ASD_FFT.o"
