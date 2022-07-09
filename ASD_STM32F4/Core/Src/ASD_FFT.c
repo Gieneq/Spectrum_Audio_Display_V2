@@ -49,7 +49,12 @@ float32_t bounds_last_velocity[BANDS_COUNT];
 float32_t bounds_velocity[BANDS_COUNT];
 float32_t bounds_acceleration[BANDS_COUNT];
 
+#define PHYSICS_MUL 1e6
 #define IDLE_SUM_THRESHOLD 0.2
+
+#define IDLE_SUM_THRESHOLD 0.2
+#define BASS_ENERGY_THRESHOLD 49.9
+#define ENERGY_COLLECT_COUNT 4
 
 void ASD_FFT_init() {
 	/* Key points used in double buffering */
@@ -141,12 +146,12 @@ float32_t* ASD_FFT_evalFFT(float32_t* boundHeights) {
 void ASD_FFT_evalDynamics(float32_t* boundHeights, bounds_t* bounds, float32_t dts) {
 		//current ACCELERATION evaluated on previous values
 		for(int i = 0; i < BANDS_COUNT; i++)
-			bounds_acceleration[i] = (bounds_velocity[i] - bounds_last_velocity[i]) / dts;
+			bounds_acceleration[i] = PHYSICS_MUL * (bounds_velocity[i] - bounds_last_velocity[i]) / dts;
 
 		//current VELOCITY evaluated on previous values and save discarded as last
 		for(int i = 0; i < BANDS_COUNT; i++) {
 			bounds_last_velocity[i] = bounds_velocity[i];
-			bounds_velocity[i] = (boundHeights[i] - bounds_last_heights[i]) / dts;
+			bounds_velocity[i] = PHYSICS_MUL * (boundHeights[i] - bounds_last_heights[i]) / dts;
 		}
 
 		//current HEIGHT(POSITION) and save discarded as last
@@ -164,6 +169,16 @@ void ASD_FFT_evalDynamics(float32_t* boundHeights, bounds_t* bounds, float32_t d
 		}
 		bounds->heightsSum = boundsSum;
 		bounds->isIdle = boundsSum < IDLE_SUM_THRESHOLD;
+
+		float bassEnergy = 0;
+		for(int i = 0; i < ENERGY_COLLECT_COUNT; i++) {
+			bassEnergy += bounds->velocities[i];
+		}
+		if(bassEnergy < 0)
+			bassEnergy = -bassEnergy;
+		bounds->bassEnergy = bassEnergy;
+
+		bounds->bassTrig = bassEnergy > BASS_ENERGY_THRESHOLD;
 
 		bounds->dt_sec = dts;
 }

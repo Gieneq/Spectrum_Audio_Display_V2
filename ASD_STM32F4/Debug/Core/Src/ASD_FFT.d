@@ -1,5 +1,6 @@
 Core/Src/ASD_FFT.o: ../Core/Src/ASD_FFT.c ../Core/Inc/ASD_FFT.h \
- ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
+ ../Core/Inc/ASD_Utils.h ../Core/Inc/main.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
@@ -39,8 +40,9 @@ Core/Src/ASD_FFT.o: ../Core/Src/ASD_FFT.c ../Core/Inc/ASD_FFT.h \
  ../Drivers/CMSIS/DSP/Include/arm_const_structs.h \
  ../Drivers/CMSIS/DSP/Include/arm_math.h \
  ../Drivers/CMSIS/DSP/Include/arm_common_tables.h \
- ../Core/Inc/pixeltypes.h ../Core/Inc/ASD_Presets.h
+ ../Core/Inc/pixeltypes.h
 ../Core/Inc/ASD_FFT.h:
+../Core/Inc/ASD_Utils.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -88,4 +90,3 @@ Core/Src/ASD_FFT.o: ../Core/Src/ASD_FFT.c ../Core/Inc/ASD_FFT.h \
 ../Drivers/CMSIS/DSP/Include/arm_math.h:
 ../Drivers/CMSIS/DSP/Include/arm_common_tables.h:
 ../Core/Inc/pixeltypes.h:
-../Core/Inc/ASD_Presets.h:

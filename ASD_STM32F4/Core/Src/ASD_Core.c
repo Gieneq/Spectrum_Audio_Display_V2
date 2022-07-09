@@ -22,6 +22,9 @@ uint32_t idleDetectorInterval;
 animation_t _currentAnimation;
 animation_t _attachedAnimation;
 
+static volatile uint32_t _rnd_mix_1;
+static volatile uint32_t _rnd_mix_2;
+
 const uint16_t DAC_SINE_SAMPLES[128] = {2048, 2142, 2236, 2329, 2422, 2514, 2605, 2694, 2782, 2868, 2952, 3034, 3114, 3191, 3265, 3337, 3405, 3470, 3531, 3589, 3644, 3694, 3740, 3783, 3821, 3855, 3884, 3909, 3930, 3946, 3958, 3965, 3967, 3965, 3958, 3946, 3930, 3909, 3884, 3855, 3821, 3783, 3740, 3694, 3644, 3589, 3531, 3470, 3405, 3337, 3265, 3191, 3114, 3034, 2952, 2868, 2782, 2694, 2605, 2514, 2422, 2329, 2236, 2142, 2048, 1953, 1859, 1766, 1673, 1581, 1490, 1401, 1313, 1227, 1143, 1061, 981, 904, 830, 758, 690, 625, 564, 506, 451, 401, 355, 312, 274, 240, 211, 186, 165, 149, 137, 130, 128, 130, 137, 149, 165, 186, 211, 240, 274, 312, 355, 401, 451, 506, 564, 625, 690, 758, 830, 904, 981, 1061, 1143, 1227, 1313, 1401, 1490, 1581, 1673, 1766, 1859, 1953};
 
 float32_t bands[BANDS_COUNT];
@@ -91,6 +94,7 @@ void ASD_CORE_init() {
 	ASD_FFT_init();
 
 	HAL_TIM_Base_Start(&htim6); //timing
+	HAL_TIM_Base_Start(&htim10); //random generator
 	HAL_TIM_Base_Start_IT(&htim7); // swipe animation
 
 	HAL_GPIO_WritePin(BATCH_DONE_GPIO_Port, BATCH_DONE_Pin, GPIO_PIN_RESET);
@@ -106,6 +110,7 @@ void ASD_CORE_init() {
 
 /* Execute every 1 tick = 1 ms */
 void ASD_CORE_asyncUpdate() {
+	_rnd_mix_1++;
 	if(_swipesCount != 0) {
 		/* Update swipe tick timer */
 		if(_swipeNextCounter > 10) {
@@ -126,6 +131,7 @@ void ASD_CORE_asyncUpdate() {
 
 
 void ASD_CORE_processSignal() {
+	_rnd_mix_2++;
 	/* Evaluate sampling time - load recorded time and start over. Then evaluate sampling frequency */
 	_samplingTimeMicros = __HAL_TIM_GET_COUNTER(&htim6);
 	__HAL_TIM_SET_COUNTER(&htim6, 0);

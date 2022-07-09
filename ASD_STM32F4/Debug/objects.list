@@ -3,6 +3,7 @@
 "./Core/Src/ASD_Core.o"
 "./Core/Src/ASD_Display.o"
 "./Core/Src/ASD_FFT.o"
+"./Core/Src/ASD_Utils.o"
 "./Core/Src/adc.o"
 "./Core/Src/dac.o"
 "./Core/Src/dma.o"

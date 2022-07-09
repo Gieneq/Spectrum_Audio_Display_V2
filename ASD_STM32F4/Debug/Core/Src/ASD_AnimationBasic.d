@@ -1,5 +1,5 @@
 Core/Src/ASD_AnimationBasic.o: ../Core/Src/ASD_AnimationBasic.c \
- ../Core/Inc/ASD_AnimationBasic.h ../Core/Inc/ASD_Presets.h \
+ ../Core/Inc/ASD_AnimationBasic.h ../Core/Inc/ASD_Utils.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -42,7 +42,7 @@ Core/Src/ASD_AnimationBasic.o: ../Core/Src/ASD_AnimationBasic.c \
  ../Drivers/CMSIS/DSP/Include/arm_common_tables.h \
  ../Core/Inc/pixeltypes.h ../Core/Inc/ASD_Display.h
 ../Core/Inc/ASD_AnimationBasic.h:
-../Core/Inc/ASD_Presets.h:
+../Core/Inc/ASD_Utils.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:

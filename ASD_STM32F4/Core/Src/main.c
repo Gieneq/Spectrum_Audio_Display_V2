@@ -30,6 +30,7 @@
 /* USER CODE BEGIN Includes */
 #include "ASD_Core.h"
 #include "ASD_AnimationBasic.h"
+#include "ASD_AnimationFlame.h"
 
 /* USER CODE END Includes */
 
@@ -129,6 +130,7 @@ int main(void)
   MX_DAC_Init();
   MX_TIM2_Init();
   MX_SPI2_Init();
+  MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -139,16 +141,12 @@ int main(void)
   ASD_CORE_init();
   ASD_CORE_setSwipe(0);
   ASD_CORE_selectSignalSource(SOURCE_AUX);
-  ASD_DISP_setMaxBrightness(0.1);
-  ASD_CORE_attachAnimation(ASD_Animation_basic);
+//  ASD_DISP_setMaxBrightness(0.1);
+  ASD_CORE_attachAnimation(ASD_Animation_flame);
   printf("Loop started\n");
 
   while (1)
   {
-//	  ASD_CORE_render();
-//	  HAL_Delay(15);
-//	  ASD_Print_Debug();
-//	  HAL_Delay(5000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

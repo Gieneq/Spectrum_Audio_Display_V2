@@ -1,8 +1,8 @@
-../Core/Src/ASD_Core.c:128:6:ASD_CORE_processSignal	16	static
-../Core/Src/ASD_Core.c:147:6:ASD_CORE_render	0	static
-../Core/Src/ASD_Core.c:152:6:ASD_CORE_setGeneratorFrequency	0	static
-../Core/Src/ASD_Core.c:108:6:ASD_CORE_asyncUpdate	8	static
-../Core/Src/ASD_Core.c:163:6:ASD_CORE_setSwipe	0	static
-../Core/Src/ASD_Core.c:167:6:ASD_CORE_selectSignalSource	0	static
-../Core/Src/ASD_Core.c:171:6:ASD_CORE_attachAnimation	0	static
-../Core/Src/ASD_Core.c:90:6:ASD_CORE_init	24	static
+../Core/Src/ASD_Core.c:133:6:ASD_CORE_processSignal	16	static
+../Core/Src/ASD_Core.c:153:6:ASD_CORE_render	0	static
+../Core/Src/ASD_Core.c:158:6:ASD_CORE_setGeneratorFrequency	0	static
+../Core/Src/ASD_Core.c:112:6:ASD_CORE_asyncUpdate	8	static
+../Core/Src/ASD_Core.c:169:6:ASD_CORE_setSwipe	0	static
+../Core/Src/ASD_Core.c:173:6:ASD_CORE_selectSignalSource	0	static
+../Core/Src/ASD_Core.c:177:6:ASD_CORE_attachAnimation	0	static
+../Core/Src/ASD_Core.c:93:6:ASD_CORE_init	24	static

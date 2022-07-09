@@ -1,6 +1,7 @@
 #pragma once
 
 #include "main.h"
+//#define TURN_OFF_SAMPLING 1
 
 #define FFT_SAMPLES_COUNT 1024
 //#define SAMPLES_BUFFER_LEN (2*FFT_SAMPLES_COUNT)
@@ -17,12 +18,14 @@
 #define DISPLAY_REFRESHRATE 30
 
 typedef struct bounds_t {
-	float32_t heights[BANDS_COUNT];
-	float32_t velocities[BANDS_COUNT];
-	float32_t accelerations[BANDS_COUNT];
-	float32_t dt_sec;
-	float32_t heightsSum;
+	float32_t heights[BANDS_COUNT];        //0 - 1
+	float32_t velocities[BANDS_COUNT];     //-10 - 10
+	float32_t accelerations[BANDS_COUNT];  //-200 - 200
+	float32_t dt_sec;                      //14199
+	float32_t heightsSum;                  // 0 - 6
 	int isIdle;
+	float32_t bassEnergy;                  // 0-15-100
+	int bassTrig;
 } bounds_t;
 
 //typedef void (*animation_stage_t)(bounds_t* bounds);
@@ -44,3 +47,5 @@ typedef struct task_t {
 
 } task_t;
 
+
+uint32_t ASD_UTILS_getRandom();

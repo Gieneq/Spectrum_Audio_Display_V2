@@ -1,19 +1,19 @@
 #include <ASD_AnimationBasic.h>
 
 #define NOISE_LENGTH 128
-const uint8_t NOISE[] = {199, 218, 234, 245, 252, 255, 253, 248, 239, 228, 216, 204, 191, 180, 170, 163, 157, 154, 152, 152, 153, 155, 157, 159, 160, 160, 159, 157, 154, 151, 147, 143, 139, 136, 134, 133, 133, 134, 136, 138, 140, 143, 144, 146, 146, 145, 143, 140, 136, 131, 127, 122, 119, 116, 114, 114, 114, 116, 119, 123, 127, 131, 135, 137, 139, 139, 138, 136, 132, 128, 123, 119, 115, 112, 110, 110, 111, 114, 118, 124, 130, 137, 143, 148, 151, 153, 153, 151, 147, 141, 135, 127, 120, 114, 108, 105, 104, 105, 109, 115, 122, 131, 140, 148, 155, 160, 163, 162, 157, 150, 139, 126, 110, 94, 79, 64, 53, 44, 40, 40, 45, 55, 69, 87, 108, 131, 155, 178};
+static const uint8_t NOISE[] = {199, 218, 234, 245, 252, 255, 253, 248, 239, 228, 216, 204, 191, 180, 170, 163, 157, 154, 152, 152, 153, 155, 157, 159, 160, 160, 159, 157, 154, 151, 147, 143, 139, 136, 134, 133, 133, 134, 136, 138, 140, 143, 144, 146, 146, 145, 143, 140, 136, 131, 127, 122, 119, 116, 114, 114, 114, 116, 119, 123, 127, 131, 135, 137, 139, 139, 138, 136, 132, 128, 123, 119, 115, 112, 110, 110, 111, 114, 118, 124, 130, 137, 143, 148, 151, 153, 153, 151, 147, 141, 135, 127, 120, 114, 108, 105, 104, 105, 109, 115, 122, 131, 140, 148, 155, 160, 163, 162, 157, 150, 139, 126, 110, 94, 79, 64, 53, 44, 40, 40, 45, 55, 69, 87, 108, 131, 155, 178};
 
-float _barHeights[BANDS_COUNT];
-float _barVelocity[BANDS_COUNT];
-float _barAccelerations[BANDS_COUNT];
+static float _barHeights[BANDS_COUNT];
+static float _barVelocity[BANDS_COUNT];
+static float _barAccelerations[BANDS_COUNT];
 
 #define PARTICLE_GEN_INTERVAL 80
-uint32_t lastParticleGenTime;
+static uint32_t lastParticleGenTime;
 #define MIN_SATURATION 200
 #define MIN_VALUE 120
 
 const float32_t HUE_INCREMENT = 255.0/(BANDS_COUNT * DISPLAY_HEIGHT);
-uint16_t _hueIdx = 0;
+static uint16_t _hueIdx = 0;
 
 void ASD_Animation_dummy(bounds_t* bounds) {
 	if(HAL_GetTick() - lastParticleGenTime > PARTICLE_GEN_INTERVAL) {
