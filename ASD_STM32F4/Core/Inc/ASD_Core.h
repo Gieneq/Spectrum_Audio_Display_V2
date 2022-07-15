@@ -19,7 +19,7 @@
 #define SWIPE_STEPS 50
 
 void ASD_CORE_init();
-void ASD_CORE_asyncUpdate();
+void ASD_CORE_updateGeneral();
 void ASD_CORE_processSignal();
 void ASD_CORE_render();
 void ASD_CORE_setGeneratorFrequency(float32_t freq);

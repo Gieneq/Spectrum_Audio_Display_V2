@@ -74,7 +74,7 @@ int __io_putchar(int ch) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim == &htim7) {
 	  //1ms timer
-	  ASD_CORE_asyncUpdate();
+	  ASD_CORE_updateGeneral();
   }
 }
 
@@ -142,6 +142,7 @@ int main(void)
   ASD_CORE_setSwipe(0);
   ASD_CORE_selectSignalSource(SOURCE_AUX);
 //  ASD_DISP_setMaxBrightness(0.1);
+
   ASD_CORE_attachAnimation(ASD_Animation_flame);
   printf("Loop started\n");
 

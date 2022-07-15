@@ -12,7 +12,7 @@ static uint32_t lastParticleGenTime;
 #define MIN_SATURATION 200
 #define MIN_VALUE 120
 
-const float32_t HUE_INCREMENT = 255.0/(BANDS_COUNT * DISPLAY_HEIGHT);
+static const float32_t HUE_INCREMENT = 255.0/(BANDS_COUNT * DISPLAY_HEIGHT);
 static uint16_t _hueIdx = 0;
 
 void ASD_Animation_dummy(bounds_t* bounds) {

@@ -28,6 +28,9 @@ static uint32_t _lastBlazeTime;
 #define MIN_BRIGHTNESS 0.25
 #define MAX_BRIGHTNESS 1.0
 
+volatile uint8_t _hueShift = 200;
+int _hueCounter = 50;
+
 static uint8_t getPixelBurnTick(int x, int y){
 	if(x > 0 && x < BANDS_COUNT && y > 0 && y < DISPLAY_HEIGHT)
 		return burn_value[x + y * BANDS_COUNT];
@@ -50,7 +53,7 @@ static void makeDisplayBurnTick() {
 	}
 }
 
-void ASD_Animation_flame(bounds_t *bouds) {
+void ASD_Animation_flame(bounds_t* bouds) {
 	float32_t dt = bouds->dt_sec;
 
 	/******************************************************
@@ -94,6 +97,16 @@ void ASD_Animation_flame(bounds_t *bouds) {
 		makeDisplayBurnTick();
 	}
 
+	////////////////////
+
+	_hueCounter += 1;
+	if(_hueCounter > 8){
+		_hueCounter = 0;
+		_hueShift++;
+		if(_hueShift > 255)
+			_hueShift = 0;
+	}
+
 
 	/******************************************************
 	 *                     Animation                      *
@@ -106,13 +119,11 @@ void ASD_Animation_flame(bounds_t *bouds) {
 
 	for (int ix = 0; ix < BANDS_COUNT; ix++) {
 		int barHeight = (int)(60.0 * _barHeights[ix]); //drawable
-//		if(barHeight == 1)
-//			barHeight = 0;
 		if(barHeight > DISPLAY_HEIGHT)
 			barHeight = DISPLAY_HEIGHT;
 
 		for (int iy = 0; iy < barHeight; iy++) {
-			uint8_t hue = FIRE_TONGUE_HUE[DISPLAY_HEIGHT - 1 - (barHeight - iy - 1)];
+			uint8_t hue = (FIRE_TONGUE_HUE[DISPLAY_HEIGHT - 1 - (barHeight - iy - 1)] + _hueShift) % 255;
 			uint32_t saturation_32 = 160 + (DISPLAY_HEIGHT - 1 - (barHeight - iy - 1)) * 6;
 			uint8_t saturation = saturation_32 > 255 ? 255 : (uint8_t)(saturation_32);
 
@@ -129,7 +140,7 @@ void ASD_Animation_flame(bounds_t *bouds) {
 		for (int iy = barHeight; iy < DISPLAY_HEIGHT; iy++) {
 			uint8_t burnTick = getPixelBurnTick(ix, iy);
 			if(burnTick > 0) {
-				ASD_DISP_setPixel(ix, iy, 0, 255, burnTick);
+				ASD_DISP_setPixel(ix, iy, 255 +_hueShift, 255, burnTick);
 			} else {
 				ASD_DISP_setPixel(ix, iy, 0, 255, 0);
 			}
