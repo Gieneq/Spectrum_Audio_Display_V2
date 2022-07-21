@@ -21,6 +21,7 @@
 #include "adc.h"
 #include "dac.h"
 #include "dma.h"
+#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -131,6 +132,9 @@ int main(void)
   MX_TIM2_Init();
   MX_SPI2_Init();
   MX_TIM10_Init();
+  MX_I2C1_Init();
+  MX_SPI1_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */

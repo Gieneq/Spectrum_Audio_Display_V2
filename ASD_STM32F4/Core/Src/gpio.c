@@ -50,24 +50,46 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(BATCH_DONE_GPIO_Port, BATCH_DONE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, ADS983_SPI1_FS_Pin|BATCH_DONE_Pin|BAR_LED6_Pin|BAR_LED5_Pin
+                          |BAR_LED4_Pin|BAR_LED3_Pin|GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(SWIPE_NEXT_GPIO_Port, SWIPE_NEXT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, SWIPE_NEXT_Pin|RELAY_SIG0_Pin|RELAY_SIG1_Pin|RELAY_SIG2_Pin
+                          |BAR_LED7_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, BAR_LED2_Pin|BAR_LED1_Pin|BAR_LED0_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = BATCH_DONE_Pin;
+  GPIO_InitStruct.Pin = USER_BUTTON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(USER_BUTTON_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PCPin PCPin PCPin PCPin
+                           PCPin PCPin PC11 PC12 */
+  GPIO_InitStruct.Pin = ADS983_SPI1_FS_Pin|BATCH_DONE_Pin|BAR_LED6_Pin|BAR_LED5_Pin
+                          |BAR_LED4_Pin|BAR_LED3_Pin|GPIO_PIN_11|GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(BATCH_DONE_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = SWIPE_NEXT_Pin;
+  /*Configure GPIO pins : PBPin PBPin PBPin PBPin
+                           PBPin */
+  GPIO_InitStruct.Pin = SWIPE_NEXT_Pin|RELAY_SIG0_Pin|RELAY_SIG1_Pin|RELAY_SIG2_Pin
+                          |BAR_LED7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(SWIPE_NEXT_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PAPin PAPin PAPin */
+  GPIO_InitStruct.Pin = BAR_LED2_Pin|BAR_LED1_Pin|BAR_LED0_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 
