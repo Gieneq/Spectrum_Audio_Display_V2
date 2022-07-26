@@ -34,14 +34,30 @@ This repository contains everything you need to build your own Audio Spectrum Di
 - [ ] test custom PCB and adapt STM32's surce code to use new features,
 - [ ] create wiki page about preparing custom visual effects.
 
+Previous version done using ESP32 and 5kHz sampling rate, check **YT channel**:
+
+<p align="center">
+  <a hres="https://www.youtube.com/watch?v=Vy4BbQ_T4lo&ab_channel=Pyrograf"><img width="500" alt="Audio spectrum display V1.0 using ESP32" src="https://img.youtube.com/vi/Vy4BbQ_T4lo/0.jpg"></a>
+</p>
+
 ## STM32 HAL CubeMX sourcecode ⚙️ 
 In this [directory](ASD_STM32F4) there is source code for main microcontroller. It uses builtin SAR ADC for sampling in DMA circular mode feedeing FFT buffer. SPI is used to controll 399+14 WS2812B LEDs with encoded MOSI signal. Check details on wiki page (comming soon).
+
+<p align="center">
+  <img width="500" alt="STM32 comparison" src="Img/STM32_Comparison.jpg">
+</p>
 
 ## FFT evaluation and research 🔥
 In this [directory](FFT_Notebook) there is shown comparison between CMSIS DSP library and Python scipy.
 
 <p align="center">
   <img width="500" alt="Audio Spectrum Display with fire effect" src="Img/fft_visualization_scipy_cmsis.png">
+</p>
+
+## Electronics – design and PCB 🔌
+In this [directory](Electronics) there is custom PCB designed done using Autodesk Eagle.
+<p align="center">
+  <img width="500" alt="PCB design" src="Img/pcbway_pcb.JPG">
 </p>
 
 ## Mechanical design 🖥️
