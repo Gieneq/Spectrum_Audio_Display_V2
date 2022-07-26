@@ -14,13 +14,30 @@ This repository contains everything you need to build your own Audio Spectrum Di
   - Corel Draw and PDF files,
   - YouTube video about the casing assembly.
 
-This repo is still in development. Check out ✅ [previous version](https://github.com/Gieneq/Audio-Spectrum-Display) of this display.
+**This repo is still in development.** Check out ✅ [previous version](https://github.com/Gieneq/Audio-Spectrum-Display) of this display.
 
 <p align="center">
   <img width="500" alt="Audio Spectrum Display with fire effect" src="Img/Audio_Spectrum_Display_fire.jpg">
 </p>
 
-## FFT benchmarking 🔥
+## TODO list
+- [x] implementing FFT, display driver and animation controller on STM32F4,
+- [x] designing custom PCB for preamplifier and digital circuitry, featuring:
+  + TDA2822 preamplifier for FFT feed,
+  + TDA2822 preamplifier for driving builtin speakers,
+  + gain control using digital potentiometer,
+  + VU meter,
+  + ESP324C for WiFi capabilities,
+  + test signal generation using AD9833,
+  + bluetooth connectivity,
+  + selectable signal source.
+- [] test custom PCB and adapt STM32's surce code to use new features,
+- [] create wiki page about preparing custom visual effects,
+
+## STM32 HAL CubeMX sourcecode ⚙️ 
+In this [directory](ASD_STM32F4) there is source code for main microcontroller. It uses builtin SAR ADC for sampling in DMA circular mode feedeing FFT buffer. SPI is used to controll 399+14 WS2812B LEDs with encoded MOSI signal. Check details on wiki page (comming soon).
+
+## FFT evaluation and research 🔥
 In this [directory](FFT_Notebook) there is shown comparison between CMSIS DSP library and Python scipy.
 
 <p align="center">
