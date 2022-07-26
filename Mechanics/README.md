@@ -21,3 +21,11 @@ The mechanical project and casin was inspired by [PLATINUM](https://www.youtube.
 ## Manufacturing
 
 All files are ready to manufacture. They were ordered from [LaserCraft](http://lasercraft.pl/)
+
+## Changes
+
+The main body of the display is ver rigid but the back of the casing is too flexible. The should be made 2 changes:
+- add  better supports to screw backplate in place,
+- divide backplate into 2 kinds of sections: only protective and easly removable to have access to the circuitry. 
+
+Despite that, the material can be replaced with more rigid one like painted MDF or HDF.
