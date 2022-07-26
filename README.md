@@ -31,8 +31,8 @@ This repository contains everything you need to build your own Audio Spectrum Di
   + test signal generation using AD9833,
   + bluetooth connectivity,
   + selectable signal source.
-- [] test custom PCB and adapt STM32's surce code to use new features,
-- [] create wiki page about preparing custom visual effects,
+- [ ] test custom PCB and adapt STM32's surce code to use new features,
+- [ ] create wiki page about preparing custom visual effects.
 
 ## STM32 HAL CubeMX sourcecode ⚙️ 
 In this [directory](ASD_STM32F4) there is source code for main microcontroller. It uses builtin SAR ADC for sampling in DMA circular mode feedeing FFT buffer. SPI is used to controll 399+14 WS2812B LEDs with encoded MOSI signal. Check details on wiki page (comming soon).
